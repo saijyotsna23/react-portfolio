@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState } from "react";
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -20,12 +20,12 @@ const useSubmit = () => {
       }
       setResponse({
         type: 'success',
-        message: `Thanks for your submission ${data.firstName}, we will get back to you shortly!`,
+        message: "Thanks for your submission ${data.firstName}, we will get back to you shortly!.This won't work I just added it to show case my skills",
       })
     } catch (error) {
       setResponse({
         type: 'error',
-        message: 'Something went wrong, please try again later!',
+        message: "Something went wrong, please try again later!This won't work I just added it to show case my skills",
       })
     } finally {
       setLoading(false);
