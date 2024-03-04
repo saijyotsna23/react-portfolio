@@ -20,7 +20,7 @@ const useSubmit = () => {
       }
       setResponse({
         type: 'success',
-        message: "Thanks for your submission ${data.firstName}, we will get back to you shortly!.This won't work I just added it to show case my skills",
+        message: `Thanks for your submission ${data.firstName}, we will get back to you shortly!.This won't work I just added it to show case my skills`,
       })
     } catch (error) {
       setResponse({
