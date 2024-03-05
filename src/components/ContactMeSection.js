@@ -19,7 +19,7 @@ import useSubmit from '../hooks/useSubmit';
 import FullScreenSection from './FullScreenSection';
 
 const ContactMeSection = () => {
-  const { isLoading, response, submit } = useSubmit();
+  const { isLoading} = useSubmit();
   const { onOpen } = useAlertContext();
 
   const formik = useFormik({
