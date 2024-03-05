@@ -10,8 +10,9 @@ import {
   Textarea,
   VStack,
 } from '@chakra-ui/react';
+import emailjs from '@emailjs/browser'; // Import EmailJS library
 import { useFormik } from 'formik';
-import React, { useEffect } from 'react'; // Import useEffect
+import React from 'react';
 import * as Yup from 'yup';
 import { useAlertContext } from '../context/alertContext';
 import useSubmit from '../hooks/useSubmit';
@@ -20,17 +21,6 @@ import FullScreenSection from './FullScreenSection';
 const ContactMeSection = () => {
   const { isLoading, response, submit } = useSubmit();
   const { onOpen } = useAlertContext();
-
-  useEffect(() => {
-    // This effect will run whenever the `response` state changes.
-    if (response) {
-      if (response.type === 'success') {
-        onOpen('success', response.message);
-      } else if (response.type === 'error') {
-        onOpen('error', response.message);
-      }
-    }
-  }, [response, onOpen]);
 
   const formik = useFormik({
     initialValues: {
@@ -45,8 +35,13 @@ const ContactMeSection = () => {
       comment: Yup.string().required('Comment is required').min(25, 'Comment must be at least 25 characters'),
     }),
     onSubmit: async (values, { resetForm }) => {
-      await submit('api/submit', values); // Placeholder URL
-      // No need to handle the response here; useEffect will take care of it.
+      try {
+        await emailjs.send('service_d6v3rk2', 'template_x1kg4he', values, '7klHOsP6fFRQG8ZXX');
+        onOpen('success', 'Email sent successfully!');
+        resetForm();
+      } catch (error) {
+        onOpen('error', 'Failed to send email. Please try again later.');
+      }
     },
   });
 
